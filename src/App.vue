@@ -18,6 +18,10 @@ const addToTotal = (item) => {
   }
 }
 
+function formatPrice(price) {
+  return price.toLocaleString()
+}
+
 const formattedPrice = computed(() => {
   return price.value.toLocaleString()
 })
@@ -63,8 +67,8 @@ const themeOnClick = () => {
           <v-col v-for="item in items" :key="item.id" cols="4">
             <v-card :color="selectedItems[item.id] ? 'primary' : ''" @click="addToTotal(item)">
               <v-card-title class="text-h3">{{ item.name }}</v-card-title>
-              <!-- TODO 金額をカンマ表示できるようにする-->
-              <v-card-text class="text-h4">{{ item.price }} 円</v-card-text>
+              <!-- TODO 算出プロパティでカンマつけたほうがいいかもしれない -->
+              <v-card-text class="text-h4">{{ formatPrice(item.price) }} 円</v-card-text>
               <v-card-text v-if="item.description">Prompt: {{ item.description }}</v-card-text>
               <div class="image-container">
                 <img :src="item.image" alt="Image" />
